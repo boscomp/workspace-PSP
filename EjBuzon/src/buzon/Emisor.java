@@ -13,17 +13,17 @@ public class Emisor implements Runnable{
 	
 	public void mandarMensaje () {
 		Random random = new Random();
-		int cont=0;
-		while (cont<1) {
+	
+		while (true) {
 		if (!buzon.estaLleno()) {
 			buzon.entraMensaje();
-			cont++;
+	
 			buzon.setMensaje("Hola");
 		}
 		else {
 			try {
 				System.out.println("El aforo está completo");
-				Thread.sleep(random.nextInt(3)+1);
+				Thread.sleep(random.nextInt(3000)+1);
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();

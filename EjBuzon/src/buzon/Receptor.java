@@ -15,12 +15,13 @@ public class Receptor implements Runnable{
 	
 	public void leer () {
 		Random random = new Random();
-		int cont=0;
-		while (cont<1) {
+
+		while (true) {
 		if (buzon.estaLleno()) {
 			buzon.saleMensaje();
-			cont++;
-			System.out.println("Mensaje: "+buzon.getMensaje());
+		
+			System.err.println("Mensaje: "+buzon.getMensaje());
+			System.out.println();
 			
 			
 		}
