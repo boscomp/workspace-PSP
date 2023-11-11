@@ -40,44 +40,6 @@ public class Impresora {
 	}
 	
 
-//	public synchronized void imprimir(String usuario, String texto) {
-//
-//		if(isOcupada() && !isOcupadaPorUsuario(usuario)) {
-//			try {
-//				Thread.sleep((2000));
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		else if (!isOcupada() || isOcupadaPorUsuario(usuario)) {
-//		ocuparImpresora(usuario);
-//		System.out.println(usuario + " - (copia " + numCopias + ") - " + texto);
-//	
-//		// Despu�s de imprimir, incremento el n�mero de copias que llevo
-//		numCopias++;
-//	
-//		if (numCopias > 5) {
-//			liberarImpresora();
-//			
-//			numCopias = 1;
-//			
-//		}
-//		try {
-//			Thread.sleep(500);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//		
-//	
-//	
-//		
-//	}
-
 	public boolean isOcupada() {
 		return usuarioActual != null;
 	}
