@@ -8,12 +8,10 @@ public class Parking {
 	public Parking() {
 		plazasOcupadas = 0;
 	}
-
-	public synchronized void entrar(String puerta, Integer cochesQueQuierenEntrar) {
-		if (cochesQueQuierenEntrar == 0) {
-			return;
-		}
-		if (plazasOcupadas+cochesQueQuierenEntrar>MAX_PLAZAS) {
+//metodo syncro mover que llame a entrar y salir
+	
+	public synchronized void usarPuerta(String puerta, Integer cochesQueUsan) {
+		if ((plazasOcupadas + cochesQueUsan)> MAX_PLAZAS || (plazasOcupadas + cochesQueUsan)<0){
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -21,8 +19,37 @@ public class Parking {
 				e.printStackTrace();
 			}
 		}
-		plazasOcupadas += cochesQueQuierenEntrar;
-		imprimirMensajeEntrada(puerta, cochesQueQuierenEntrar);
+		if (!((plazasOcupadas + cochesQueUsan)> MAX_PLAZAS) && !((plazasOcupadas + cochesQueUsan)<0)) {
+		plazasOcupadas += cochesQueUsan;
+		notify();
+		}
+		
+	}
+	
+	public void entrar(String puerta, Integer cochesQueQuierenEntrar) {
+		if (cochesQueQuierenEntrar == 0) {
+			return;
+		} 
+		else {
+			usarPuerta(puerta, cochesQueQuierenEntrar);
+			imprimirMensajeEntrada(puerta, cochesQueQuierenEntrar);
+			
+		}
+//		else {
+//			while (plazasOcupadas + cochesQueQuierenEntrar > MAX_PLAZAS) {
+//				try {
+//					wait();
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//			if (plazasOcupadas + cochesQueQuierenEntrar <= MAX_PLAZAS) {
+//				plazasOcupadas += cochesQueQuierenEntrar;
+//				imprimirMensajeEntrada(puerta, cochesQueQuierenEntrar);
+//				notify();
+//			}
+//		}
 	}
 
 	public void salir(String puerta, Integer cochesQuePuedenSalir) {
@@ -30,38 +57,52 @@ public class Parking {
 			return;
 		}
 		else {
-			mover(puerta, -cochesQuePuedenSalir);
+			usarPuerta(puerta, -cochesQuePuedenSalir);
+			imprimirMensajeSalida(puerta, cochesQuePuedenSalir);
 		}
-		plazasOcupadas -= cochesQuePuedenSalir;
-		imprimirMensajeSalida(puerta, cochesQuePuedenSalir);
-	}
+//		while (plazasOcupadas - cochesQuePuedenSalir < 0) {
+//			try {
+//				wait();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		if (plazasOcupadas - cochesQuePuedenSalir >= 0) {
+//			plazasOcupadas -= cochesQuePuedenSalir;
+//			imprimirMensajeSalida(puerta, cochesQuePuedenSalir);
+//			notify();
+//		}
+//
+//	}
 
-	public synchronized void mover(String puerta, Integer cochesQueSeMueven) {
-		if (cochesQueSeMueven == 0) {
-			return;
-		}
-		if (plazasOcupadas+cochesQueSeMueven>MAX_PLAZAS) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if (plazasOcupadas+cochesQueSeMueven<0) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if (plazasOcupadas<MAX_PLAZAS) {
-			notify();
-		}
-		
-		plazasOcupadas -= cochesQueSeMueven;
-		imprimirMensajeSalida(puerta, cochesQueSeMueven);
+//	public synchronized void mover(String puerta, Integer cochesQueSeMueven) {
+//		if (cochesQueSeMueven == 0) {
+//			return;
+//		}
+//		if (plazasOcupadas+cochesQueSeMueven>MAX_PLAZAS) {
+//			try {
+//				wait();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		if (plazasOcupadas+cochesQueSeMueven<0) {
+//			try {
+//				wait();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		if (plazasOcupadas<MAX_PLAZAS) {
+//			notify();
+//		}
+//		
+//		plazasOcupadas -= cochesQueSeMueven;
+//		imprimirMensajeSalida(puerta, cochesQueSeMueven);
+//	}
 	}
 
 	// No hay que modificar nada de este m�todo

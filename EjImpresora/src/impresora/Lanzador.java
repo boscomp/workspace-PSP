@@ -17,17 +17,7 @@ public class Lanzador {
 		Usuario escritor3 = new Usuario("Epi", impresora);
 		Thread hiloEpi = new Thread (escritor3);
 		hiloEpi.start();
-		
-		
-		try {
-			hiloBlas.join();
-			hiloLaura.join();
-			hiloEpi.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("lanzador terminado");
+
 
 	}
 }

@@ -2,7 +2,7 @@ package ejImpresora;
 
 
 
-public class Usuario {
+public class Usuario implements Runnable {
 
 	private String nombre;
 	private Impresora impresora;
@@ -17,6 +17,11 @@ public class Usuario {
 			String texto = "Texto " + i;
 			impresora.imprimir(nombre, texto);
 		}
+	}
+
+	@Override
+	public void run() {
+		escribir();
 	}
 
 }

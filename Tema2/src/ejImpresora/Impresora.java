@@ -7,16 +7,21 @@ public class Impresora {
 	private Integer numCopias = 1;
 	
 	
-	public void imprimir(String usuario, String texto) {
+	public synchronized boolean imprimir(String usuario, String texto) {
 	
 		System.out.println(usuario + " - (copia " + numCopias + ") - " + texto);
 	
 		// Despu�s de imprimir, incremento el n�mero de copias que llevo
 		numCopias++;
+		usuarioActual=usuario;
 
 		if (numCopias > 5) {
 			numCopias = 1;
 		}
+		if (numCopias<6) {
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean isOcupada() {

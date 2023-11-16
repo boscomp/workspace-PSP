@@ -11,14 +11,12 @@ public class Impresora {
 			try {
 				wait();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		if (!isOcupada()) {
+		if (!isOcupada()||isOcupadaPorUsuario(usuario)) {
 			ocuparImpresora(usuario);
-		}
-		if (isOcupadaPorUsuario(usuario)){
+	
 			
 		System.out.println(usuario + " - (copia " + numCopias + ") - " + texto);
 		try {

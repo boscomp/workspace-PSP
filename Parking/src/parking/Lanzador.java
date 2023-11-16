@@ -4,6 +4,10 @@ package parking;
 
 public class Lanzador {
 	public static void main(String[] args) {
+		int x=5;
+		int y=4;
+		int z=-y;
+		System.out.println((x+z+z));
 		Parking parking = new Parking();
 		PuertaSalida salida = new PuertaSalida(parking, "Salida 1");
 		Thread hiloSal = new Thread(salida);
