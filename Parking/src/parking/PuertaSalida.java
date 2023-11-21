@@ -8,11 +8,11 @@ public class PuertaSalida extends Puerta  {
 	
 	public void trabajar() {
 		while(true) {
-			System.out.println("hola");
+
 			Integer cochesQuePermitimosSalir = calcularNumCochesPermitidos();
-			System.out.println("1");
+
 			parking.salir(nombre, cochesQuePermitimosSalir);
-			System.out.println("2");
+
 			esperarProximaApertura();
 		}
 	}
