@@ -10,6 +10,7 @@ public class GestorProcesos extends Thread {
 	private Socket socket;
 	private OutputStream os;
 
+
 	public GestorProcesos(Socket socket) {
 		this.socket = socket;
 	}
