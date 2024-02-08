@@ -14,7 +14,7 @@ public class ServidorSocket {
 
 	public ServidorSocket(int puerto) throws IOException {
 		this.port = puerto;
-		serverSocket = new ServerSocket();
+		serverSocket = new ServerSocket(puerto);
 	}
 
 

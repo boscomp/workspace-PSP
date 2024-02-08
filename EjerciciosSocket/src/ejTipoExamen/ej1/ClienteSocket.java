@@ -90,18 +90,23 @@ public class ClienteSocket {
 		
 		BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 		try {
-			cliente = new ClienteSocket("localhost", 8001);
+			cliente = new ClienteSocket("localhost", 8080);
 			while (true) {
 				System.out.println("(Cliente) Escriba un mensaje para enviar al servidor: ");
 				String mensajeParaEnviar = consoleReader.readLine();
-				if (mensajeParaEnviar.substring(0, 3).equals("#0#")) {
-					break;
-				}
 				
 
 				cliente.enviarMensajeTexto(mensajeParaEnviar);
 				String mensajeRecibido = cliente.leerMensajeTexto();
 				System.out.println("(Cliente) Mensaje recibido: " + mensajeRecibido);
+				if (mensajeRecibido.equals("#99#")) {
+					System.out.println("Mensaje no adecuadamente formateado para su tratamiento.");
+				}
+				if (mensajeRecibido.equals("#0#")) {
+					System.out.println("Fin de la conexión");
+					break;
+				}
+				
 			}
 			cliente.pw.close();
 			cliente.br.close();

@@ -33,9 +33,9 @@ public class GestorProcesos implements Runnable{
 	}
 	
 	public String decodificar(String mensaje) throws IOException {
-
-		String encodedString = Base64.getEncoder().encodeToString(mensaje.getBytes());
-		return encodedString;
+		byte[] decodedBytes = Base64.getDecoder().decode(mensaje);
+		String decodedString = new String(decodedBytes);
+		return decodedString;
 	}
 
 
@@ -48,18 +48,19 @@ public class GestorProcesos implements Runnable{
 				
 				String mensajeRecibido = br.readLine();
 				if (mensajeRecibido.substring(0, 3).equals("#0#")) {
+					pw.println(mensajeRecibido.substring(0,3));
 					break;
 				}
 				else if (mensajeRecibido.substring(0, 3).equals("#1#")) {
-					String codigo=codificar(mensajeRecibido);
+					String codigo=codificar(mensajeRecibido.substring(3));
 					pw.println(codigo);
 				}
 				else if (mensajeRecibido.substring(0, 3).equals("#2#")) {
-					String decodificado=decodificar(mensajeRecibido);
+					String decodificado=decodificar(mensajeRecibido.substring(3));
 					pw.println(decodificado);
 				}
 				else {
-					pw.println("#0#");
+					pw.println("#99#");
 				}
 			}
 
